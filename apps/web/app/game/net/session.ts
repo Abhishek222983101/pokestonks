@@ -240,10 +240,11 @@ export class BattleSession {
     try { this.room.send(type, payload); } catch { /* connection is reconnecting; the server resyncs us */ }
   }
 
+  /** Leave the room. Never waits more than 1.5 s: behind some proxies the close handshake can stall. */
   async leave() {
     if (this.closed) return;
     this.closed = true;
-    try { await this.room.leave(true); } catch { /* already gone */ }
+    try { await Promise.race([this.room.leave(true), sleep(1500)]); } catch { /* already gone */ }
   }
 }
 

@@ -13,6 +13,7 @@ import { audio } from '../game/audio';
 import { Icon } from './Icon';
 import { Portrait } from './Portrait';
 import Toasts from './Toasts';
+import { EventBus } from '../game/net/events';
 import DuelDialog from './DuelDialog';
 import { Button, Panel } from './ui';
 
@@ -37,6 +38,16 @@ export default function Hud() {
   const muted = useMuted();
   const [open, setOpen] = useState(false);
   const [duel, setDuel] = useState(false);
+  // Hidden during a battle: it would cover the turn timer, and Claim opens the wallet dialog itself.
+  const [inBattle, setInBattle] = useState(false);
+  useEffect(() => {
+    const offs = [
+      EventBus.on('battle:start', () => setInBattle(true)),
+      EventBus.on('battle:closed', () => setInBattle(false)),
+      EventBus.on('game:exit', () => setInBattle(false)),
+    ];
+    return () => offs.forEach((off) => off());
+  }, []);
   const [copied, setCopied] = useState(false);
   const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -47,7 +58,7 @@ export default function Hud() {
     [],
   );
 
-  if (!address) return null;
+  if (!address || inBattle) return null;
 
   const total = totalSstock(wallet.sstock);
   const owned = SPECIES_LIST.filter((s) => (wallet.sstock[s.ticker] ?? ZERO) > ZERO);
