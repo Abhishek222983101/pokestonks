@@ -1,4 +1,5 @@
-# Battle server image. Build from the REPO ROOT:  docker build -f apps/server/Dockerfile -t pokestonks-server .
+# Battle server image (the web app deploys to Vercel separately). Build from the repo root:
+#   docker build -t pokestonks-server .
 FROM node:22-slim
 ENV PNPM_HOME=/pnpm
 ENV PATH=$PNPM_HOME:$PATH

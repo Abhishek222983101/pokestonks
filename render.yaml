@@ -3,7 +3,7 @@ services:
   - type: web
     name: pokestonks-server
     runtime: docker
-    dockerfilePath: ./apps/server/Dockerfile
+    dockerfilePath: ./Dockerfile
     dockerContext: .
     region: singapore
     plan: free                # free instances sleep after 15 idle minutes; .github/workflows/keepalive.yml pings it
