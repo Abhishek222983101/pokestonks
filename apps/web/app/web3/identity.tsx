@@ -47,14 +47,16 @@ function WalletIdentity({ children }: { children: ReactNode }) {
 
   const value = useMemo<Identity>(() => {
     const base = { login, playAsGuest, logout } as const;
-    if (!isClient || status === 'reconnecting' || status === 'connecting') {
-      return { ...base, status: 'loading', mode: 'wallet', displayName: '' };
-    }
     if (status === 'connected' && address) {
       return { ...base, status: 'signed-in', address: address as Address, mode: 'wallet', displayName: shortAddress(address, 6, 4) };
     }
+    // While a wallet is connecting, keep the current guest identity: dropping to "loading" would
+    // unmount the running game in the middle of a claim.
     if (guest) {
       return { ...base, status: 'signed-in', address: guest, mode: 'guest', displayName: `Guest ${shortAddress(guest, 4, 4)}` };
+    }
+    if (!isClient || status === 'reconnecting' || status === 'connecting') {
+      return { ...base, status: 'loading', mode: 'wallet', displayName: '' };
     }
     return { ...base, status: 'signed-out', mode: 'wallet', displayName: '' };
   }, [isClient, status, address, guest, login, playAsGuest, logout]);
