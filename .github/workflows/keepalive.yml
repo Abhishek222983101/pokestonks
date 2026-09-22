@@ -1,0 +1,14 @@
+name: keep battle server awake
+# Render's free plan sleeps after 15 idle minutes; a sleeping server makes the first match of the day slow.
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: ping /health
+        run: curl -fsS --retry 5 --retry-delay 10 --max-time 60 https://pokestonkss-server.onrender.com/health
