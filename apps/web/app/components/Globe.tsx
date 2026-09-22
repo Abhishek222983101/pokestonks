@@ -134,6 +134,8 @@ export default function Globe() {
       map.easeTo({
         center: GLOBE_CENTER,
         zoom: view.region,
+        // Landscape phones: the wallet HUD takes the top-right corner, so frame the markets left of it.
+        padding: el.clientHeight < 500 ? { top: 0, bottom: 0, left: 0, right: Math.round(Math.min(300, el.clientWidth * 0.34)) } : { top: 0, bottom: 0, left: 0, right: 0 },
         duration: reduced ? 0 : 2600,
         easing: easeInOutCubic,
         essential: true,

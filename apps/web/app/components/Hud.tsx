@@ -89,11 +89,11 @@ export default function Hud() {
           <span className="px-1 text-[15px] tabular-nums" title={displayName}>
             {shortAddress(address)}
           </span>
-          <Button variant="secondary" small icon className="short:hidden" onClick={copy} aria-label={copied ? 'Address copied' : 'Copy wallet address'}>
+          <Button variant="secondary" small icon className="short:hidden!" onClick={copy} aria-label={copied ? 'Address copied' : 'Copy wallet address'}>
             <Icon name={copied ? 'check' : 'copy'} size={14} />
           </Button>
           <a
-            className="btn btn-secondary btn-sm btn-icon short:hidden"
+            className="btn btn-secondary btn-sm btn-icon short:hidden!"
             href={addressUrl(address)}
             target="_blank"
             rel="noopener noreferrer"
@@ -105,14 +105,14 @@ export default function Hud() {
 
         {mode === 'guest' && (
           <Button small className="mt-1 w-full" onClick={() => { audio.sfx('menu_select'); login(); }}>
-            <span className="short:hidden">Connect wallet to claim</span>
-            <span className="hidden short:inline">Connect</span>
+            <span className="short:hidden!">Connect wallet to claim</span>
+            <span className="hidden! short:inline!">Connect</span>
           </Button>
         )}
 
         {!playing && (
           <>
-            <div className="mt-1 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 px-1 short:hidden">
+            <div className="mt-1 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 px-1 short:hidden!">
               <p className="text-[13px] leading-tight text-slate">
                 <span className="font-pixel t-8">MON</span>{' '}
                 <span className="font-pixel t-10 text-ink tabular-nums">{loading ? '…' : formatMon(wallet.mon)}</span>
