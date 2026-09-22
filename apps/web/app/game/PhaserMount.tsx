@@ -79,8 +79,10 @@ export default function PhaserMount({ marketId, speciesId, wallet, onExit }: Pha
         },
       });
       gameRef.current = game;
-      // Dev-only handle for QA scripts and console debugging; stripped from production builds.
-      if (process.env.NODE_ENV !== 'production') (window as unknown as { __game?: unknown }).__game = game;
+      // QA handle for scripted tests: always in dev, on deployed builds only when the staging flag is set.
+      if (process.env.NODE_ENV !== 'production' || process.env.NEXT_PUBLIC_EXPOSE_GAME === '1') {
+        (window as unknown as { __game?: unknown }).__game = game;
+      }
     })();
 
     return () => {
