@@ -69,20 +69,20 @@ export default function Title({ ready, onContinue }: Props) {
   return (
     <section
       aria-labelledby="title-heading"
-      className="pointer-events-none flex h-full flex-col items-center justify-between px-3 pt-[max(7vh,1.5rem)] pb-[max(1rem,env(safe-area-inset-bottom))]"
+      className="pointer-events-none flex h-full flex-col items-center justify-between px-3 pt-[max(7vh,1.5rem)] pb-[max(1rem,env(safe-area-inset-bottom))] short:flex-row short:justify-center short:gap-6 short:py-2"
     >
-      <header className="w-[min(88vw,34rem)]">
+      <header className="w-[min(88vw,34rem)] short:w-[min(40vw,20rem)]">
         <h1 id="title-heading" className="m-0">
           <Logotype />
         </h1>
       </header>
 
-      <Panel tone="dialog" className="pointer-events-auto w-[min(100%_-_1rem,28rem)]" aria-label="Start menu">
-        <p className="text-[17px] leading-snug">
+      <Panel tone="dialog" className="pointer-events-auto w-[min(100%_-_1rem,28rem)] short:w-[min(52vw,26rem)] short:py-2!" aria-label="Start menu">
+        <p className="text-[17px] leading-snug short:text-[15px]">
           Pick a stock as your monster, battle other players, and win tokens on Monad testnet.
         </p>
 
-        <div ref={menuRef} role="group" aria-label="Sign in" onKeyDown={onMenuKey} className="mt-3 -mx-2">
+        <div ref={menuRef} role="group" aria-label="Sign in" onKeyDown={onMenuKey} className="mt-3 -mx-2 short:mt-1">
           {signedIn ? (
             <>
               <button type="button" className="menu-item" onClick={proceed} disabled={!ready}>
@@ -123,7 +123,7 @@ export default function Title({ ready, onContinue }: Props) {
           )}
         </div>
 
-        <p className="mt-2 text-[13px] leading-snug text-cream/75">
+        <p className="mt-2 text-[13px] leading-snug text-cream/75 short:mt-1 short:text-[12px]">
           Rewards are synthetic testnet tokens and collectibles. They have no cash value.
         </p>
       </Panel>

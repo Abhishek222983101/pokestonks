@@ -60,7 +60,7 @@ export default function BrokerSelect({ initialId, onConfirm, onBack }: Props) {
   return (
     <section aria-labelledby="select-heading" className="pointer-events-none relative h-full">
       <div className="pointer-events-auto absolute inset-0 overflow-y-auto overscroll-contain pb-28">
-        <div className="mx-auto flex min-h-full max-w-[64rem] flex-col gap-2 px-2 pt-[max(0.75rem,env(safe-area-inset-top))] md:grid md:grid-cols-[minmax(0,25rem)_minmax(0,1fr)] md:items-start md:gap-6 md:px-6 md:pt-8">
+        <div className="mx-auto flex min-h-full max-w-[64rem] flex-col gap-2 px-2 pt-[max(0.75rem,env(safe-area-inset-top))] md:grid md:grid-cols-[minmax(0,25rem)_minmax(0,1fr)] md:items-start md:gap-6 md:px-6 md:pt-8 short:md:pt-2">
           <Panel tone="dialog">
             <h1 id="select-heading" className="font-pixel t-12 leading-relaxed text-yellow">
               Choose your BrokerMon
@@ -72,7 +72,7 @@ export default function BrokerSelect({ initialId, onConfirm, onBack }: Props) {
               role="radiogroup"
               aria-label="BrokerMon"
               onKeyDown={onKeyDown}
-              className="mt-3 grid grid-cols-4 gap-1"
+              className="mt-3 grid grid-cols-4 gap-1 short:mt-1 short:grid-cols-6"
             >
               {SPECIES_LIST.map((s) => {
                 const on = s.id === activeId;

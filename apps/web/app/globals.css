@@ -1,4 +1,7 @@
 @import "tailwindcss";
+
+/* Landscape phones and other short screens. */
+@custom-variant short (@media (max-height: 500px));
 /* Family name must stay exactly "Press Start 2P": the Phaser canvas draws text with it. */
 @import "@fontsource/press-start-2p";
 
@@ -563,4 +566,9 @@ body {
 @keyframes skeleton-steps {
   0%   { --fill: var(--color-cream); }
   50%  { --fill: var(--color-cream-deep); }
+}
+
+/* Short screens: keep menu rows to one line so the whole title menu fits. */
+@media (max-height: 500px) {
+  .menu-item small { display: none; }
 }

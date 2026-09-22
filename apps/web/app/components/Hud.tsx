@@ -81,7 +81,7 @@ export default function Hud() {
       aria-label="Wallet and controls"
       className="pointer-events-none fixed top-0 right-0 flex max-w-full flex-col items-end p-1 pt-[max(0.25rem,env(safe-area-inset-top))] pr-[max(0.25rem,env(safe-area-inset-right))]"
     >
-      <Panel tone="plate" className="pointer-events-auto p-2!">
+      <Panel tone="plate" className="pointer-events-auto p-2! short:p-1!">
         <div className="flex items-center gap-1">
           <span className="chip chip-plain" title={mode === 'guest' ? 'Throwaway testnet wallet saved in this browser' : 'Your connected browser wallet'}>
             {mode === 'guest' ? 'Guest' : 'Wallet'}
@@ -89,11 +89,11 @@ export default function Hud() {
           <span className="px-1 text-[15px] tabular-nums" title={displayName}>
             {shortAddress(address)}
           </span>
-          <Button variant="secondary" small icon onClick={copy} aria-label={copied ? 'Address copied' : 'Copy wallet address'}>
+          <Button variant="secondary" small icon className="short:hidden" onClick={copy} aria-label={copied ? 'Address copied' : 'Copy wallet address'}>
             <Icon name={copied ? 'check' : 'copy'} size={14} />
           </Button>
           <a
-            className="btn btn-secondary btn-sm btn-icon"
+            className="btn btn-secondary btn-sm btn-icon short:hidden"
             href={addressUrl(address)}
             target="_blank"
             rel="noopener noreferrer"
@@ -105,13 +105,14 @@ export default function Hud() {
 
         {mode === 'guest' && (
           <Button small className="mt-1 w-full" onClick={() => { audio.sfx('menu_select'); login(); }}>
-            Connect wallet to claim
+            <span className="short:hidden">Connect wallet to claim</span>
+            <span className="hidden short:inline">Connect</span>
           </Button>
         )}
 
         {!playing && (
           <>
-            <div className="mt-1 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 px-1">
+            <div className="mt-1 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 px-1 short:hidden">
               <p className="text-[13px] leading-tight text-slate">
                 <span className="font-pixel t-8">MON</span>{' '}
                 <span className="font-pixel t-10 text-ink tabular-nums">{loading ? '…' : formatMon(wallet.mon)}</span>
